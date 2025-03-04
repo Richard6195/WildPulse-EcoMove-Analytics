@@ -1,0 +1,6 @@
+$('document').ready(function(){
+  $('#sliderValue.Acc').change(function(){
+    var new_val = $(this).val();
+    $('#numericValue.Acc').val(new_val);
+  });
+});
