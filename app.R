@@ -698,7 +698,7 @@ shinyApp(
     tabPanel("GPS Analysis", uiOutput("page4"), icon = icon("magnifying-glass-chart")),
     tabPanel("Data Export", uiOutput("page5"), icon = icon("download")),
     tabPanel("User Notes", uiOutput("page6"), icon = icon("folder-open")),
-    tabPanel("App Manual", uiOutput("page7"), icon = icon("info")),
+    #tabPanel("App Manual", uiOutput("page7"), icon = icon("info")),
     
     # Apply a Bootstrap theme
     theme = shinythemes::shinytheme("cerulean")  # 'cerulean' bootstrap theme
@@ -753,12 +753,12 @@ shinyApp(
             hr(),
 
             # README link
-            h5(
-              "Click ",
-              a("README", target = "_blank", href = "README.pdf"),
-              " for information on input data formats."
-            ),
-            br(),
+            #h5(
+            #  "Click ",
+             # a("README", target = "_blank", href = "README.pdf"),
+             # " for information on input data formats."
+            #),
+           # br(),
             
             # Current time display
             h4(textOutput("currentTime"))
