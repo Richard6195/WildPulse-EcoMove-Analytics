@@ -1,10 +1,10 @@
 # WildPulse EcoMove Analytics
 
-**WildPulse EcoMove Analytics** is an R/Shiny web application for importing, preprocessing, screening, analyzing, and exporting wildlife tracking data (GPS + optional VeDBA data derived from accelerometer dat).
+**WildPulse EcoMove Analytics** is an R/Shiny web application for importing, preprocessing, screening, analyzing, and exporting wildlife tracking data (GPS + optional VeDBA data derived from accelerometer data).
 
-This README provides a comprehensive overview of each code section (UI tabs, server logic, key parameters), explaining how to navigate and utilize the application.
+This **README** provides a comprehensive overview of each code section (UI tabs, server logic, key parameters), explaining how to navigate and utilize the application.
 
-**Note, this app is still in active development. Any bug reports and suggestions welcome!
+**Note, this app is still in active development. Any bug reports and suggestions welcome!**
 
 ![Leaflet Screenshot](App_leaflet_example.png)
 
@@ -22,7 +22,7 @@ This README provides a comprehensive overview of each code section (UI tabs, ser
   - [4. GPS Analysis Tab](#4-gps-analysis-tab)
   - [5. Data Export Tab](#5-data-export-tab)
   - [6. User Notes / Manual Tab](#6-user-notes--manual-tab)
-- [Additional Info of Metrics and Verdicts Computed in App](#info)
+- [Additional Info of Metrics & Verdicts Computed in App](#additional-info-of-metrics--verdicts-computed-in-app)
 - [Contact & Acknowledgments](#contact--acknowledgments)
 
 ---
@@ -107,12 +107,13 @@ Or press **Run App** if using RStudio’s GUI.
 - **R Console:** A mini built-in console to run R scripts that modify the data (especially user-defined columns or verdicts). See `Example User Verdict Based Threshold.R` to load in the app for example.
 
 ![GPS Processing Tab](App_GPS_Processing_page_example.png)
+![GPS Processing Tab](App_GPS_Processing_page_example2.png)
 
 #### Isolation Forest & Expression Builder
 **Expression Builder:**  
 The user builds a custom statement `ifelse(...)` that assigns `'Anomalous'` or `'Not Anomalous'`.
 
-Insert operators (`>`, `<`, `&`, etc.), thresholds (like `Anglespeed`, `GPSaccuracy`), and eventually end with `, 'Anomalous', 'Not Anomalous')`.
+Insert operators (`>`, `<`, `&`, etc.), thresholds (like `Anglespeed`, `GPSaccuracy`), and eventually end with 'Anomalous', 'Not Anomalous')`.
 
 **Isolation Forest:**  
 Uses the `isotree` package, letting the user choose variables (e.g., `Outgoing_speed`, `Ang_vertex`, `mean_VeDBA_interval`), confidence level (e.g., `0.99`), and tree parameters.
@@ -135,6 +136,8 @@ Clicking on points can open popups, enable re-labelling of screened fixes as 'An
 - **Residency time estimation:** grid-based or line-based. Also summaries of revisit counts, average speed, or VeDBA in each cell.  
 - **Point- and kernel-based heatmaps**   
 
+![GPS Analysis Tab](App_GPS_Analysis_page_example.png)
+
 ### 5. Data Export Tab
 
 - **Choose:** “Processed GPS Data” or “Analysis Subset.” 
@@ -148,7 +151,7 @@ Clicking on points can open popups, enable re-labelling of screened fixes as 'An
 
 ---
 
-### 7. Additional Info of Metrics and Verdicts Computed in App
+### Additional Info of Metrics & Verdicts Computed in App
 
 When the Shiny app processes GPS data (especially in the **GPS Processing** or **GPS Analysis** steps), it computes several key columns to help flag potential outliers and describe each fix’s movement geometry. Below is a brief description of the most common ones:
 
@@ -207,7 +210,7 @@ During **anomaly/outlier** detection and **manual overrides**, the app maintains
    - *Definition*: A merged label that reconciles both `Verdict_user` and `Verdict_IF`.  
    - *Calculation Logic*:  
      - If **both** `Verdict_user` and `Verdict_IF` exist, then:  
-     - If both are `'Anomalous'`, then `combined_verdict` becomes `'Anomalous'`; otherwise if `Verdict_user` is `'Not Anomalous'` and `Verdict_IF` is `'Anomalous'`, then `combined_verdict` becomes `'Not Anomalous'`; otherwise if 'Verdict_user` is `'Anomalous'` and `Verdict_IF` is `'Not Anomalous'`, then `combined_verdict` becomes `'Anomalous'`; otherwise if both are `'Not Anomalous'`, then `combined_verdict` becomes `'Not Anomalous'`.
+     - If **both** are `'Anomalous'`, then `combined_verdict` becomes `'Anomalous'`; otherwise if `Verdict_user` is `'Not Anomalous'` and `Verdict_IF` is `'Anomalous'`, then `combined_verdict` becomes `'Not Anomalous'`; otherwise if `Verdict_user` is `'Anomalous'` and `Verdict_IF` is `'Not Anomalous'`, then `combined_verdict` becomes `'Anomalous'`; otherwise if both are `'Not Anomalous'`, then `combined_verdict` becomes `'Not Anomalous'`.
    - If only `Verdict_user` is present, `combined_verdict` follows it; if only `Verdict_IF` is present, it uses that.  
    - *Interpretation*: The final classification used in most downstream steps. By default, “Anomalous” takes precedence when *`Verdict_user`* method flags the fix.
 
